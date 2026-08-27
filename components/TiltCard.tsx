@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
 
 export default function TiltCard({
   children,
@@ -10,6 +10,20 @@ export default function TiltCard({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { rootMargin: "-35% 0px -35% 0px", threshold: 0 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
@@ -31,7 +45,9 @@ export default function TiltCard({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out will-change-transform ${className}`}
+      className={`motion-safe:transition-[transform,border-color,box-shadow] motion-safe:duration-300 motion-safe:ease-out will-change-transform ${
+        active ? "border-accent/70" : "border-border"
+      } ${className}`}
     >
       {children}
     </div>
