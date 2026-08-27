@@ -28,7 +28,7 @@ export default function CustomCursor() {
     };
 
     const handleOver = (e: MouseEvent) => {
-      ring.style.setProperty("--cursor-scale", isInteractive(e.target) ? "1.8" : "1");
+      ring.style.setProperty("--cursor-scale", isInteractive(e.target) ? "1.35" : "1");
     };
 
     const tick = () => {
@@ -54,7 +54,7 @@ export default function CustomCursor() {
     <div
       ref={ringRef}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 rounded-full border border-accent/70 opacity-0 transition-[opacity,border-color] duration-200"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] h-4 w-4 rounded-full border border-accent/50 opacity-0 transition-[opacity,border-color] duration-200"
     />
   );
 }
