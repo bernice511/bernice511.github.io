@@ -1,5 +1,6 @@
 import Section from "./Section";
 import Reveal from "./Reveal";
+import DrawLine from "./DrawLine";
 import { experience } from "@/lib/data";
 
 export default function Experience() {
@@ -9,6 +10,7 @@ export default function Experience() {
         {experience.map((job, i) => (
           <Reveal key={job.org} delay={i * 100}>
           <div className="relative border-l border-border pl-6">
+            <DrawLine />
             <div className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent" />
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h3 className="text-lg font-semibold">{job.org}</h3>

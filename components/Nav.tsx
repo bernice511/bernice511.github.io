@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { profile } from "@/lib/data";
+import ConfettiButton from "./ConfettiButton";
 
 const links = [
   { href: "#experience", id: "experience", label: "Experience" },
@@ -70,13 +71,13 @@ export default function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a
+          <ConfettiButton
             href={profile.resumeHref}
             download
             className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-accent/90"
           >
             Resume
-          </a>
+          </ConfettiButton>
           <button
             type="button"
             aria-expanded={open}

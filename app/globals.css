@@ -66,3 +66,56 @@ html {
 .skip-link:focus {
   top: 1rem;
 }
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.16;
+  background: var(--accent);
+}
+
+.aurora-blob-1 {
+  top: -10%;
+  left: -10%;
+  width: 480px;
+  height: 480px;
+  animation: aurora-drift-1 26s ease-in-out infinite;
+}
+
+.aurora-blob-2 {
+  top: 40%;
+  right: -15%;
+  width: 420px;
+  height: 420px;
+  animation: aurora-drift-2 32s ease-in-out infinite;
+}
+
+.aurora-blob-3 {
+  bottom: -15%;
+  left: 30%;
+  width: 380px;
+  height: 380px;
+  animation: aurora-drift-3 30s ease-in-out infinite;
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.15); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 30px) scale(1.1); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -50px) scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none !important;
+  }
+}
