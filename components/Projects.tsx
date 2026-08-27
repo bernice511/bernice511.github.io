@@ -1,5 +1,6 @@
 import Section from "./Section";
 import Reveal from "./Reveal";
+import TiltCard from "./TiltCard";
 import { projects } from "@/lib/data";
 
 export default function Projects() {
@@ -8,8 +9,9 @@ export default function Projects() {
       <div className="grid gap-6 sm:grid-cols-2">
         {projects.map((project, i) => (
           <Reveal key={project.slug} delay={i * 90}>
+          <TiltCard>
           <article
-            className="flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_20px_45px_-24px_rgba(45,212,191,0.45)]"
+            className="flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-accent/50 hover:shadow-[0_20px_45px_-24px_rgba(45,212,191,0.45)]"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h3 className="text-lg font-semibold">{project.title}</h3>
@@ -45,6 +47,7 @@ export default function Projects() {
               </a>
             )}
           </article>
+          </TiltCard>
           </Reveal>
         ))}
       </div>

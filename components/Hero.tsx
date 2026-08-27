@@ -1,9 +1,12 @@
 import { profile } from "@/lib/data";
 import Reveal from "./Reveal";
+import HeroBackdrop from "./HeroBackdrop";
 
 export default function Hero() {
   return (
-    <section id="top" className="mx-auto max-w-5xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
+    <section id="top" className="relative overflow-hidden">
+      <HeroBackdrop />
+      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
       <Reveal>
         <p className="font-mono text-sm text-accent">Hi, I&apos;m</p>
         <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -49,6 +52,7 @@ export default function Hero() {
         </a>
       </div>
       </Reveal>
+      </div>
     </section>
   );
 }

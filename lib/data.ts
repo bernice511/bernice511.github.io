@@ -9,6 +9,20 @@ export const profile = {
   resumeHref: "/resume.pdf",
 };
 
+export type Stat = {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+};
+
+export const stats: Stat[] = [
+  { value: 18000, suffix: "+", label: "Preclinical safety studies (PRINCE in production)" },
+  { value: 100, suffix: " GB+", label: "Biomedical data indexed for RAG" },
+  { value: 98, suffix: "%+", label: "NER accuracy across 40+ entity fields" },
+  { value: 90, suffix: "%+", label: "Text-to-SQL accuracy vs. AWS Athena" },
+];
+
 export type Experience = {
   org: string;
   location: string;
