@@ -1,4 +1,5 @@
 import { profile } from "@/lib/data";
+import CopyButton from "./CopyButton";
 
 export default function Footer() {
   return (
@@ -9,10 +10,13 @@ export default function Footer() {
           Looking for a Spring 2027 Agentic AI internship — happy to talk about LLM systems, RAG, or
           anything in between.
         </p>
-        <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
-          <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
-            {profile.email}
-          </a>
+        <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm">
+          <span className="inline-flex items-center gap-2">
+            <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
+              {profile.email}
+            </a>
+            <CopyButton value={profile.email} />
+          </span>
           <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-muted hover:text-foreground">
             LinkedIn
           </a>

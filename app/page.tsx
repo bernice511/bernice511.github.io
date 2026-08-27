@@ -7,12 +7,13 @@ import Education from "@/components/Education";
 import Awards from "@/components/Awards";
 import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
     <>
       <Nav />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <Stats />
         <Experience />
@@ -22,6 +23,7 @@ export default function Home() {
         <Skills />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

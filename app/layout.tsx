@@ -13,9 +13,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bernice511.github.io";
+const asset = (path: string) => `${basePath}${path}`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: `${profile.name} — ${profile.title}`,
   description: profile.tagline,
+  icons: {
+    icon: [
+      { url: asset("/favicon-32.png"), sizes: "32x32", type: "image/png" },
+      { url: asset("/favicon-16.png"), sizes: "16x16", type: "image/png" },
+      { url: asset("/icon.png"), sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: asset("/apple-icon.png"), sizes: "180x180", type: "image/png" }],
+  },
+  openGraph: {
+    title: `${profile.name} — ${profile.title}`,
+    description: profile.tagline,
+    url: basePath || "/",
+    siteName: profile.name,
+    images: [{ url: asset("/og-image.png"), width: 1200, height: 630, alt: profile.name }],
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} — ${profile.title}`,
+    description: profile.tagline,
+    images: [asset("/og-image.png")],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,6 +52,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         {children}
       </body>
     </html>
