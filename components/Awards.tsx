@@ -42,6 +42,16 @@ export default function Awards() {
                 {award.title}
               </h3>
               <p className="mt-1 text-sm leading-relaxed text-muted">{award.description}</p>
+              {award.href && (
+                <a
+                  href={award.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex w-fit text-sm font-medium text-accent hover:underline"
+                >
+                  Read the paper ↗
+                </a>
+              )}
             </div>
           </Reveal>
         ))}

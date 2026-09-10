@@ -56,46 +56,58 @@ export const stats: Stat[] = [
 export const featured = {
   eyebrow: "Flagship — in production at Bayer",
   title: "PRINCE",
-  subtitle: "A ReAct multi-agent system embedded in preclinical drug-safety research",
+  subtitle:
+    "A supervisor-orchestrated multi-agent knowledge engine embedded in preclinical drug-safety research",
   dates: "Jan 2024 – Dec 2025 · Thoughtworks for Bayer",
   award: "Bayer GenAI Award — Best Technical Implementation",
+  /** The system is published; the architecture below follows Figure 1 of the paper. */
+  paper: {
+    label: "Published in Frontiers in Artificial Intelligence",
+    citation:
+      "Vieira-Vieira CH, Kulkarni SS, Zalewski A, Löffler J, Münch J & Kreuchwig A (2025). From data silos to insights: the PRINCE multi-agent knowledge engine for preclinical drug development. Front. Artif. Intell. 8:1636809.",
+    href: "https://doi.org/10.3389/frai.2025.1636809",
+    note: "Contributions acknowledged as part of the Thoughtworks team.",
+  },
   problem:
-    "Toxicologists needed answers that lived across 18,000+ preclinical safety studies — some in 100 GB+ of unstructured PDF reports, some in warehouse tables. Getting one answer meant filing an ad-hoc data request and waiting days.",
+    "Toxicologists needed answers that lived across 18,000+ preclinical safety studies — some in unstructured PDF study reports, some in warehouse tables. Getting one answer meant filing an ad-hoc data request and waiting days.",
   approach:
-    "A LangGraph ReAct agent that routes each question to the right tool: hybrid RAG over an OpenSearch vector store for narrative evidence, Text-to-SQL against AWS Athena for quantitative queries, and an NER pipeline for structured extraction — every answer citation-linked back to its source document.",
+    "A LangGraph supervisor agent analyses intent and coordinates specialists: a researcher agent that retrieves evidence, a reflection agent that judges whether enough was gathered and asks follow-up questions, a document planner for regulatory drafts such as IND reports, a writer agent, and a human-in-the-loop node for review before anything is drafted. Every claim in the answer is citation-linked to its source paragraph.",
   impact:
-    "Deployed into the daily research workflow. Query response time down 30%, ad-hoc data requests down from days to minutes, and data correction from days to 15 minutes — while surfacing entry errors in 30%+ of records that manual review had missed.",
+    "Deployed into the daily research workflow across 18,000+ studies. 30% average improvement in response time for complex queries after the multi-agent rollout, 75% of surveyed users reported spending significantly less time searching, and ad-hoc data requests dropped from days to minutes.",
   pillars: [
     {
-      name: "Hybrid RAG",
+      name: "Hybrid retrieval",
       detail:
-        "100 GB+ biomedical corpus in OpenSearch. Semantic + keyword hybrid search, 5x query expansion, cross-encoder re-ranking, citation-linked responses.",
-      metric: "100 GB+ indexed",
+        "GPT-4o derives metadata filters and keywords while GPT-4o mini expands the query five ways in parallel. Weighted hybrid search over Amazon OpenSearch (0.7 vector / 0.3 keyword), then bge-reranker-large re-ranks ~20 candidate chunks down to the ones that actually answer the question.",
+      metric: "0.7 / 0.3 hybrid",
     },
     {
       name: "Text-to-SQL",
       detail:
-        "Claude 3.5 Sonnet with dynamic few-shot prompting and structured output validation, executing against AWS Athena.",
+        "Dynamic few-shot prompting pulls the nearest curated query examples from OpenSearch, Claude 3.5 Sonnet writes the SQL, and AWS Athena executes it — retrying up to three times with the failed query and error as context.",
       metric: "90%+ SQL accuracy",
     },
     {
-      name: "NER extraction",
+      name: "Metadata extraction",
       detail:
-        "40+ entity fields extracted from study reports, catching entry errors that manual review missed.",
-      metric: "98%+ accuracy",
+        "A NER pipeline reads study identifiers, compound names, species, routes of administration, dosage and clinical findings straight out of study reports — fixing the incomplete metadata that retrieval quality depends on, and surfacing entry errors manual review had missed.",
+      metric: "98%+ across 40+ fields",
     },
     {
       name: "Eval as a CI gate",
       detail:
-        "RAGAS + DeepEval run expert-curated test sets on every code or prompt change across 5 metrics, with Langfuse tracing and score-drop root-cause analysis before release.",
+        "RAGAS + DeepEval run expert-curated question sets on every code or prompt change across five metrics — faithfulness, answer relevancy, context precision, factual correctness and semantic similarity — with Langfuse tracing and score-drop root-cause analysis before release.",
       metric: "5 metrics, every commit",
     },
   ],
   stack: [
     "LangGraph",
     "LangChain",
+    "GPT-4o",
     "Claude 3.5 Sonnet",
-    "OpenSearch",
+    "text-embedding-3-large",
+    "bge-reranker-large",
+    "Amazon OpenSearch",
     "AWS Athena",
     "RAGAS",
     "DeepEval",
@@ -195,6 +207,7 @@ export type Award = {
   description: string;
   date: string;
   kind: "award" | "publication" | "talk" | "workshop";
+  href?: string;
   /** Renders larger, with an amber accent. Reserve for the single best credential. */
   highlight?: boolean;
 };
@@ -208,10 +221,12 @@ export const awards: Award[] = [
     highlight: true,
   },
   {
-    title: "Frontiers in AI",
-    description: "Contributions to PRINCE acknowledged in peer-reviewed AI journal",
-    date: "2025",
+    title: "Frontiers in Artificial Intelligence",
+    description:
+      "Named in the acknowledgements of \"From data silos to insights: the PRINCE multi-agent knowledge engine for preclinical drug development\" (Front. Artif. Intell. 8:1636809)",
+    date: "Aug 2025",
     kind: "publication",
+    href: "https://doi.org/10.3389/frai.2025.1636809",
   },
   {
     title: "Speaker, XConf",

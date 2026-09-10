@@ -27,15 +27,28 @@ export default function Featured() {
           </div>
           <p className="mt-3 max-w-3xl text-lg text-muted">{featured.subtitle}</p>
           <p className="mt-1 font-mono text-xs text-muted">{featured.dates}</p>
+
+          <a
+            href={featured.paper.href}
+            target="_blank"
+            rel="noreferrer"
+            className="card card-glow mt-6 block max-w-3xl p-4 transition-colors hover:border-accent/50"
+          >
+            <p className="eyebrow">{featured.paper.label}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{featured.paper.citation}</p>
+            <p className="mt-2 text-sm font-medium text-accent">
+              {featured.paper.note} Read the paper ↗
+            </p>
+          </a>
         </Reveal>
 
         <Reveal delay={120}>
           {/* the diagram has a minimum legible width; let narrow screens pan it */}
           <div className="card mt-10 overflow-x-auto p-5 sm:p-8">
-            <AgentGraph className="min-w-[34rem]" />
+            <AgentGraph className="min-w-[52rem]" />
           </div>
           <p className="mt-3 text-center text-xs text-muted">
-            One question, routed to the right tool, answered with its sources attached.
+            Architecture after Figure 1 of the paper — condensed, with the models it names.
           </p>
         </Reveal>
 
