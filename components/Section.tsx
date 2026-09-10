@@ -4,18 +4,24 @@ import Reveal from "./Reveal";
 export default function Section({
   id,
   title,
+  kicker,
   children,
 }: {
   id: string;
   title: string;
+  kicker?: string;
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-5xl px-6 py-14 sm:py-16">
+    <section id={id} className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
       <Reveal>
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
+        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
+          {kicker && <p className="font-mono text-xs text-muted">{kicker}</p>}
+        </div>
+        <div className="hairline mt-5" />
       </Reveal>
-      <div className="mt-8">{children}</div>
+      <div className="mt-10">{children}</div>
     </section>
   );
 }

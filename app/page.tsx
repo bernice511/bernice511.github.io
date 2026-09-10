@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
+import Featured from "@/components/Featured";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
@@ -16,10 +17,11 @@ export default function Home() {
       <main id="main" className="flex-1">
         <Hero />
         <Stats />
+        <Featured />
         <Experience />
         <Projects />
-        <Education />
         <Awards />
+        <Education />
         <Skills />
       </main>
       <Footer />

@@ -1,13 +1,39 @@
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+/**
+ * Prefix a /public asset with the configured basePath.
+ * next/image does not apply basePath when `images.unoptimized` is set, and plain
+ * <a href> never does, so every public asset has to go through this.
+ */
+export const asset = (path: string) => `${basePath}${path}`;
+
 export const profile = {
   name: "Bernice Mercy Sharon Malaiarasu",
+  shortName: "Bernice Malaiarasu",
   title: "Generative AI Engineer",
+  location: "Boston, MA",
+  photo: asset("/headshot.jpg"),
+  availability: "Open to Spring 2027 Agentic AI internships",
+  /** One-line hook. This is the only sentence most recruiters will read. */
+  headline: "I build production LLM systems that people actually use.",
+  /** Two-line supporting proof, shown directly under the headline. */
+  subhead:
+    "2+ years shipping multi-agent GenAI at Bayer with Thoughtworks — RAG, Text-to-SQL, and NER running against 18,000+ preclinical safety studies. Now an MS in AI student at Northeastern.",
+  /** Long-form version, used for meta description and OG cards. */
   tagline:
     "Generative AI engineer with 4+ years of software/data engineering experience, including 2+ years building production LLM systems at Thoughtworks, recipient of the Bayer GenAI Award for Best Technical Implementation. Built PRINCE, a multi-agent platform embedded in Bayer's preclinical research workflow across RAG, Text-to-SQL, and NER at scale. Now pursuing an MS in AI at Northeastern's Khoury College, seeking a Spring 2027 Agentic AI internship.",
   email: "bernicemalaiarasu@gmail.com",
   linkedin: "https://linkedin.com/in/bernice-mercy",
   github: "https://github.com/bernice511",
-  resumeHref: "/resume.pdf",
+  resumeHref: asset("/resume.pdf"),
 };
+
+/** Logos-as-text row under the hero CTAs — instant credibility scan. */
+export const trustBar: { name: string; note: string }[] = [
+  { name: "Bayer", note: "GenAI in production" },
+  { name: "Thoughtworks", note: "Sr. Consultant" },
+  { name: "Northeastern", note: "MS in AI" },
+];
 
 export type Stat = {
   value: number;
@@ -22,6 +48,60 @@ export const stats: Stat[] = [
   { value: 98, suffix: "%+", label: "NER accuracy across 40+ entity fields" },
   { value: 90, suffix: "%+", label: "Text-to-SQL accuracy vs. AWS Athena" },
 ];
+
+/**
+ * The flagship case study, promoted out of the Experience bullets into its own
+ * section so it reads as work rather than as a resume line.
+ */
+export const featured = {
+  eyebrow: "Flagship — in production at Bayer",
+  title: "PRINCE",
+  subtitle: "A ReAct multi-agent system embedded in preclinical drug-safety research",
+  dates: "Jan 2024 – Dec 2025 · Thoughtworks for Bayer",
+  award: "Bayer GenAI Award — Best Technical Implementation",
+  problem:
+    "Toxicologists needed answers that lived across 18,000+ preclinical safety studies — some in 100 GB+ of unstructured PDF reports, some in warehouse tables. Getting one answer meant filing an ad-hoc data request and waiting days.",
+  approach:
+    "A LangGraph ReAct agent that routes each question to the right tool: hybrid RAG over an OpenSearch vector store for narrative evidence, Text-to-SQL against AWS Athena for quantitative queries, and an NER pipeline for structured extraction — every answer citation-linked back to its source document.",
+  impact:
+    "Deployed into the daily research workflow. Query response time down 30%, ad-hoc data requests down from days to minutes, and data correction from days to 15 minutes — while surfacing entry errors in 30%+ of records that manual review had missed.",
+  pillars: [
+    {
+      name: "Hybrid RAG",
+      detail:
+        "100 GB+ biomedical corpus in OpenSearch. Semantic + keyword hybrid search, 5x query expansion, cross-encoder re-ranking, citation-linked responses.",
+      metric: "100 GB+ indexed",
+    },
+    {
+      name: "Text-to-SQL",
+      detail:
+        "Claude 3.5 Sonnet with dynamic few-shot prompting and structured output validation, executing against AWS Athena.",
+      metric: "90%+ SQL accuracy",
+    },
+    {
+      name: "NER extraction",
+      detail:
+        "40+ entity fields extracted from study reports, catching entry errors that manual review missed.",
+      metric: "98%+ accuracy",
+    },
+    {
+      name: "Eval as a CI gate",
+      detail:
+        "RAGAS + DeepEval run expert-curated test sets on every code or prompt change across 5 metrics, with Langfuse tracing and score-drop root-cause analysis before release.",
+      metric: "5 metrics, every commit",
+    },
+  ],
+  stack: [
+    "LangGraph",
+    "LangChain",
+    "Claude 3.5 Sonnet",
+    "OpenSearch",
+    "AWS Athena",
+    "RAGAS",
+    "DeepEval",
+    "Langfuse",
+  ],
+};
 
 export type Experience = {
   org: string;
@@ -114,6 +194,9 @@ export type Award = {
   title: string;
   description: string;
   date: string;
+  kind: "award" | "publication" | "talk" | "workshop";
+  /** Renders larger, with an amber accent. Reserve for the single best credential. */
+  highlight?: boolean;
 };
 
 export const awards: Award[] = [
@@ -121,28 +204,34 @@ export const awards: Award[] = [
     title: "Bayer GenAI Award",
     description: "Best Technical Implementation for multi-agent GenAI system at Bayer",
     date: "2025",
+    kind: "award",
+    highlight: true,
   },
   {
     title: "Frontiers in AI",
     description: "Contributions to PRINCE acknowledged in peer-reviewed AI journal",
     date: "2025",
+    kind: "publication",
   },
   {
     title: "Speaker, XConf",
     description:
       "Multi-agent architecture of PRINCE and LLM evaluation strategies, Thoughtworks Bangalore",
     date: "Aug 2025",
+    kind: "talk",
   },
   {
     title: "GenAI Workshop Facilitator",
     description: "Designed and delivered workshop on LLMs and RAG to 50+ developers",
     date: "Mar 2025",
+    kind: "workshop",
   },
   {
     title: "Speaker, Geeknight",
     description:
       "Talk on improving Text-to-SQL accuracy using dynamic few-shot prompting, 80+ engineers",
     date: "Dec 2024",
+    kind: "talk",
   },
 ];
 
@@ -179,9 +268,12 @@ export type Project = {
   title: string;
   dates: string;
   summary: string;
+  /** Headline outcome, shown large on the card so it survives a 3-second scan. */
+  metric?: { value: string; label: string };
   bullets: string[];
   tech: string[];
   repo?: string;
+  demo?: string;
 };
 
 export const projects: Project[] = [
@@ -189,6 +281,7 @@ export const projects: Project[] = [
     slug: "delivery-delay-prediction",
     title: "E-Commerce Delivery Delay Prediction",
     dates: "Northeastern · Apr 2026",
+    metric: { value: "0.922", label: "ROC-AUC on 100K+ orders" },
     summary:
       "Predicts whether an order from the Brazilian Olist e-commerce platform will arrive late and estimates how many days late, so at-risk orders can be flagged before they ship.",
     bullets: [
@@ -203,6 +296,7 @@ export const projects: Project[] = [
     slug: "crisis-aware-dialogue",
     title: "Crisis-Aware Dialogue: Self-Harm Prevention Classifier",
     dates: "Northeastern · June 2026",
+    metric: { value: "0.920", label: "F1 at ~1/100th of GPT-5's size" },
     summary:
       "A routed, prompt-specialized pipeline for handling distress-signal user input (self-harm, suicide ideation, abuse disclosure), fine-tuning LLaMA 3 on a published benchmark of implicit suicidal-ideation cases for early-intervention systems.",
     bullets: [
@@ -217,6 +311,7 @@ export const projects: Project[] = [
     slug: "entiscribe",
     title: "entiscribe — PDF Entity Extraction & Knowledge Graph",
     dates: "Side project",
+    metric: { value: "0 keys", label: "Runs fully local — no API keys" },
     summary:
       "Upload PDFs, define custom entity types, extract them with an LLM, evaluate extraction quality, and link entities across every uploaded file into an interactive knowledge graph.",
     bullets: [
@@ -231,6 +326,7 @@ export const projects: Project[] = [
     slug: "jobapplier",
     title: "jobApplier — AI-Assisted Job Search Platform",
     dates: "Side project",
+    metric: { value: "Human-in-loop", label: "Never submits without you" },
     summary:
       "A semi-automated LinkedIn job-search assistant that tailors resumes and cover letters to real job descriptions with guardrails against fabrication and against unattended submission.",
     bullets: [
@@ -245,6 +341,7 @@ export const projects: Project[] = [
     slug: "prompt-lab",
     title: "Prompt Playground",
     dates: "Side project",
+    metric: { value: "Prod traces", label: "Replay real Langfuse generations" },
     summary:
       "A tool for browsing Langfuse traces and re-running any generation's prompt through Claude to compare a new completion against the original in production LLM debugging workflows.",
     bullets: [
@@ -258,6 +355,7 @@ export const projects: Project[] = [
     slug: "assistive-device",
     title: "Personal Assistance System for Visually Impaired",
     dates: "Loyola ICAM · Nov 2021 – May 2022",
+    metric: { value: "96.24%", label: "On-device face recognition accuracy" },
     summary:
       "A Raspberry Pi wearable assistive device combining real-time face recognition, object detection, and obstacle sensing with audio feedback, built as an undergraduate capstone project.",
     bullets: [

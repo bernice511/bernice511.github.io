@@ -5,16 +5,14 @@ import { education } from "@/lib/data";
 export default function Education() {
   return (
     <Section id="education" title="Education">
-      <div className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-2">
         {education.map((item, i) => (
           <Reveal key={item.school} delay={i * 100}>
-            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-6 last:border-0 last:pb-0">
-              <div>
-                <h3 className="font-semibold">{item.school}</h3>
-                <p className="text-sm text-muted">{item.degree}</p>
-                <p className="text-sm text-muted">{item.location}</p>
-              </div>
-              <span className="text-sm text-muted">{item.dates}</span>
+            <div className="card card-glow h-full p-6">
+              <p className="font-mono text-xs text-muted">{item.dates}</p>
+              <h3 className="mt-2 font-semibold leading-snug">{item.school}</h3>
+              <p className="mt-2 text-sm text-accent">{item.degree}</p>
+              <p className="mt-1 text-sm text-muted">{item.location}</p>
             </div>
           </Reveal>
         ))}

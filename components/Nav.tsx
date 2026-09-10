@@ -6,9 +6,9 @@ import { profile } from "@/lib/data";
 import ConfettiButton from "./ConfettiButton";
 
 const links = [
+  { href: "#prince", id: "prince", label: "PRINCE" },
   { href: "#experience", id: "experience", label: "Experience" },
   { href: "#projects", id: "projects", label: "Projects" },
-  { href: "#education", id: "education", label: "Education" },
   { href: "#awards", id: "awards", label: "Awards" },
   { href: "#skills", id: "skills", label: "Skills" },
   { href: "#contact", id: "contact", label: "Contact" },
@@ -52,10 +52,10 @@ export default function Nav() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="#top" className="font-semibold tracking-tight">
-          Bernice Malaiarasu
+          {profile.shortName}
         </Link>
         <nav className="hidden gap-6 text-sm md:flex">
           {links.map((link) => (

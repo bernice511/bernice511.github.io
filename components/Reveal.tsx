@@ -35,7 +35,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out ${
+      className={`reveal motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       } ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}

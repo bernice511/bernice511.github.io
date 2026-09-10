@@ -6,11 +6,11 @@ import { projects } from "@/lib/data";
 
 export default function Projects() {
   return (
-    <Section id="projects" title="Projects">
-      <div className="grid gap-6 sm:grid-cols-2">
+    <Section id="projects" title="Projects" kicker={`${projects.length} builds`}>
+      <div className="grid items-start gap-6 lg:grid-cols-2">
         {projects.map((project, i) => (
-          <Reveal key={project.slug} delay={i * 90}>
-            <TiltCard className="rounded-2xl border bg-surface shadow-sm hover:border-accent/50 hover:shadow-[0_20px_45px_-24px_rgba(45,212,191,0.45)]">
+          <Reveal key={project.slug} delay={i * 80} className="h-full">
+            <TiltCard className="card card-glow h-full shadow-sm hover:shadow-[0_24px_50px_-28px_var(--accent)]">
               <ProjectCard project={project} />
             </TiltCard>
           </Reveal>

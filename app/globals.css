@@ -1,22 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b1220;
-  --surface: #121b2e;
-  --foreground: #e8edf5;
-  --muted: #94a3b8;
-  --border: #4a6386;
+  --background: #05080f;
+  --surface: #0c1421;
+  --surface-2: #111c2d;
+  --foreground: #eaf0f8;
+  --muted: #8ea3c0;
+  --border: #1c2941;
+  --border-strong: #2c3f5e;
   --accent: #2dd4bf;
-  --accent-soft: #134e4a;
+  --accent-2: #818cf8;
+  --accent-3: #fbbf24;
+  --accent-soft: #0f3d3a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
   --color-accent-soft: var(--accent-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -67,35 +75,126 @@ html {
   top: 1rem;
 }
 
-.aurora-blob {
+/* ---------- type ---------- */
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--foreground) 10%, var(--accent) 55%, var(--accent-2) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- surfaces ---------- */
+
+.card {
+  background: linear-gradient(160deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.card-glow {
+  position: relative;
+}
+
+.card-glow::before {
+  content: "";
   position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, color-mix(in oklab, var(--accent) 55%, transparent), transparent 45%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.card-glow:hover::before,
+.card-glow:focus-within::before {
+  opacity: 1;
+}
+
+/* subtle dot grid used behind the hero + featured sections */
+.grid-bg {
+  background-image: radial-gradient(circle at center, color-mix(in oklab, var(--border-strong) 85%, transparent) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong) 18%, var(--border-strong) 82%, transparent);
+}
+
+/* ---------- availability pill ---------- */
+
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.16;
   background: var(--accent);
 }
 
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+  animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  75%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* ---------- aurora ---------- */
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.14;
+}
+
 .aurora-blob-1 {
-  top: -10%;
+  top: -12%;
   left: -10%;
-  width: 480px;
-  height: 480px;
+  width: 520px;
+  height: 520px;
+  background: var(--accent);
   animation: aurora-drift-1 26s ease-in-out infinite;
 }
 
 .aurora-blob-2 {
-  top: 40%;
+  top: 38%;
   right: -15%;
-  width: 420px;
-  height: 420px;
+  width: 460px;
+  height: 460px;
+  background: var(--accent-2);
   animation: aurora-drift-2 32s ease-in-out infinite;
 }
 
 .aurora-blob-3 {
   bottom: -15%;
-  left: 30%;
-  width: 380px;
-  height: 380px;
+  left: 28%;
+  width: 400px;
+  height: 400px;
+  background: var(--accent);
   animation: aurora-drift-3 30s ease-in-out infinite;
 }
 
@@ -114,8 +213,82 @@ html {
   50% { transform: translate(40px, -50px) scale(1.2); }
 }
 
+/* ---------- agent graph ---------- */
+
+.graph-edge {
+  stroke: var(--border-strong);
+  stroke-width: 1.25;
+  fill: none;
+}
+
+/* Every edge sets pathLength="100", so one dash pattern works for all of them
+   regardless of the actual geometric length. */
+.graph-pulse {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 7 93;
+  animation: graph-flow 3.4s linear infinite;
+}
+
+@keyframes graph-flow {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+.graph-node {
+  animation: graph-breathe 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes graph-breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.graph-halo {
+  animation: graph-halo 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes graph-halo {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.18); opacity: 0.1; }
+}
+
+/* ---------- marquee (trust bar) ---------- */
+
+.tick {
+  animation: tick-in 0.6s ease-out both;
+}
+
+@keyframes tick-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- reduced motion ---------- */
+
 @media (prefers-reduced-motion: reduce) {
-  .aurora-blob {
+  .aurora-blob,
+  .status-dot::after,
+  .graph-pulse,
+  .graph-node,
+  .graph-halo,
+  .tick {
     animation: none !important;
   }
+  .graph-pulse {
+    stroke-dasharray: none;
+    opacity: 0.55;
+  }
+}
+
+/* content is revealed by IntersectionObserver; without JS show everything */
+.no-js-visible {
+  opacity: 1 !important;
+  transform: none !important;
 }
