@@ -131,15 +131,21 @@ export const experience: Experience[] = [
     dates: "Jul 2026 – Present",
     bullets: [
       {
+        heading: "NewsroomFeed — AI journalism platform",
+        text: "LangGraph pipeline turning six live civic feeds (MassDOT, TomTom, NWS, Boston 311) into hyperlocal AI news, with a journalist approving every item before it publishes.",
+      },
+      {
+        text: "Newsworthiness scored as severity × likelihood per ISO 31000 / FEMA — built, but kept switched off until it is calibrated against real editorial judgment.",
+      },
+      {
+        text: "Shipped as a Next.js PWA: geolocated feed, commute-route push alerts, community reports with crowd verification, and an editorial review queue.",
+      },
+      {
         heading: "Husky AI",
         text: "Platform enabling students to practice and refine prompt engineering skills through interactive exercises and guided feedback.",
       },
       {
-        heading: "AI Journalism Platform",
-        text: "Research project applying data analytics, AI video generation, and automated report generation to make news more accessible and reduce journalists' production workload.",
-      },
-      {
-        heading: "Lab WordPress Site",
+        heading: "Lab WordPress site",
         text: "Maintain and extend the lab's WordPress website, implementing new features and resolving issues.",
       },
     ],
@@ -151,30 +157,18 @@ export const experience: Experience[] = [
     dates: "Aug 2022 – Dec 2025",
     bullets: [
       {
-        heading: "PRINCE Chatbot – Generative AI (Jan 2024 – Dec 2025)",
-        text: "Led development of PRINCE (LangChain, LangGraph) — a ReAct-based multi-agent system with tool calling, deployed in production at Bayer across 18,000+ preclinical safety studies, cutting query response time by 30% and automating report generation.",
+        heading: "PRINCE — Generative AI (Jan 2024 – Dec 2025)",
+        text: "Led development of the multi-agent system described above — hybrid RAG, Text-to-SQL, metadata extraction, and eval-as-a-CI-gate — in production at Bayer across 18,000+ preclinical safety studies.",
       },
       {
-        text: "Built the RAG backbone: 100 GB+ of biomedical data indexed in OpenSearch (vector store) using text embeddings, hybrid semantic + keyword search, 5x query expansion, and cross-encoder re-ranking; every response citation-linked to source.",
+        heading: "PRINCE Data Platform — Data Engineering (Aug 2022 – Dec 2023)",
+        text: "Processed 20,000+ preclinical study PDFs — extracting, chunking, and embedding into OpenSearch as the vector store that PRINCE's retrieval runs on.",
       },
       {
-        text: "Built Text-to-SQL on Claude 3.5 Sonnet using few-shot prompt engineering and structured output validation; pushed SQL accuracy above 90% against AWS Athena, cutting ad-hoc data requests from days to minutes.",
+        text: "Migrated 56 database tables from Kubernetes to AWS, with Terraform-managed pipelines syncing into Elasticsearch as the query layer for the preclinical research API.",
       },
       {
-        text: "Built a NER pipeline achieving 98%+ accuracy across 40+ entity fields, cutting data correction from days to 15 minutes and surfacing entry errors in 30%+ of records missed in prior manual review.",
-      },
-      {
-        text: "Built RAGAS + DeepEval as a CI/CD gate for MLOps; auto-ran expert-curated test sets on every code or prompt change across 5 metrics, with Langfuse observability and score drops triggering root-cause analysis before reaching production.",
-      },
-      {
-        heading: "PRINCE Data Platform – Data Engineering (Aug 2022 – Dec 2023)",
-        text: "Processed 20,000+ preclinical study PDFs — extracting, chunking, and generating text embeddings into OpenSearch as the vector store powering PRINCE's RAG retrieval.",
-      },
-      {
-        text: "Migrated 56 database tables from Kubernetes to AWS; built Terraform-managed pipelines syncing data into Elasticsearch as the query layer for the preclinical research API.",
-      },
-      {
-        text: "Built and maintained daily Spark (Scala) + AWS Glue ETL pipelines across 70+ source and 20+ sink tables, ingesting study reports, LIMS data, and lab metadata.",
+        text: "Built and maintained daily Spark (Scala) + AWS Glue ETL across 70+ source and 20+ sink tables, ingesting study reports, LIMS data, and lab metadata.",
       },
     ],
   },
@@ -265,8 +259,11 @@ export const skills = {
   Cloud: ["AWS Glue", "Athena", "OpenSearch", "DynamoDB", "S3", "Step Functions"],
   "Languages & Frameworks": [
     "Python",
+    "TypeScript",
     "Scala",
     "SQL",
+    "FastAPI",
+    "React / Next.js",
     "PyTorch",
     "TensorFlow",
     "HuggingFace",
@@ -282,60 +279,104 @@ export type Project = {
   slug: string;
   title: string;
   dates: string;
-  summary: string;
-  /** Headline outcome, shown large on the card so it survives a 3-second scan. */
+  /** Headline outcome, shown large so it survives a 3-second scan. */
   metric?: { value: string; label: string };
-  bullets: string[];
+  summary: string;
+  /** Replaces prose bullets: three or four scannable label/value rows. */
+  specs: { label: string; value: string }[];
   tech: string[];
   repo?: string;
   demo?: string;
+  /** Renders full-width above the grid. Reserve for the two strongest. */
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "entiscribe",
+    title: "entiscribe — PDF Entity Extraction & Knowledge Graph",
+    dates: "Side project",
+    featured: true,
+    metric: { value: "0 keys", label: "Runs fully local" },
+    summary:
+      "Upload PDFs, define your own entity types, extract them with an LLM, score the extraction, and link entities across every file into an interactive knowledge graph.",
+    specs: [
+      {
+        label: "Pipeline",
+        value: "LangGraph graphs for ingest → extract → evaluate → knowledge-graph assembly.",
+      },
+      {
+        label: "Eval",
+        value:
+          "Gold-standard precision/recall/F1 against a reference CSV, plus an always-on LLM groundedness judge, merged into one report.",
+      },
+      {
+        label: "Graph",
+        value:
+          "Canonicalizes entities that mean the same thing across files (\"Apple Inc.\" / \"Apple\") and infers links between co-occurring entities.",
+      },
+      {
+        label: "Local",
+        value:
+          "LLM calls shell out to the Claude CLI and embeddings run on a bundled ONNX model — no API keys anywhere.",
+      },
+    ],
+    tech: ["Python", "LangGraph", "LangChain", "ChromaDB", "Streamlit", "pypdf"],
+    repo: "https://github.com/bernice511/entiscribe",
+  },
+  {
+    slug: "crisis-aware-dialogue",
+    title: "Crisis-Aware Dialogue: Self-Harm Prevention Classifier",
+    dates: "Northeastern · June 2026",
+    featured: true,
+    metric: { value: "0.920", label: "F1 at ~1/100th of GPT-5's size" },
+    summary:
+      "A routed, prompt-specialized pipeline for distress-signal input — self-harm, suicidal ideation, abuse disclosure — built for early-intervention systems.",
+    specs: [
+      {
+        label: "Data",
+        value: "CRADLEBench — 1,308+ clinician-annotated cases across 7 crisis categories.",
+      },
+      {
+        label: "Model",
+        value:
+          "RoBERTa-base multi-label classifier routing into a QLoRA fine-tune of Llama-3.2-1B-Instruct.",
+      },
+      {
+        label: "Result",
+        value:
+          "0.785 macro F1, within ~2.7 points of GPT-5 alone; fine-tune cut completion loss 35% and perplexity 67% over base.",
+      },
+      {
+        label: "Caveat",
+        value:
+          "Failure modes documented rather than hidden — a rare childhood-abuse class, and over-therapizing on benign small talk.",
+      },
+    ],
+    tech: ["PyTorch", "HuggingFace", "RoBERTa", "Llama 3.2", "QLoRA", "Streamlit"],
+    repo: "https://github.com/bernice511/crisis-aware-dialogue",
+  },
   {
     slug: "delivery-delay-prediction",
     title: "E-Commerce Delivery Delay Prediction",
     dates: "Northeastern · Apr 2026",
     metric: { value: "0.922", label: "ROC-AUC on 100K+ orders" },
     summary:
-      "Predicts whether an order from the Brazilian Olist e-commerce platform will arrive late and estimates how many days late, so at-risk orders can be flagged before they ship.",
-    bullets: [
-      "XGBoost classifier + regressor on 100K+ Olist orders reached 0.922 ROC-AUC against a 6.8% real-world delay rate, outperforming LightGBM and Random Forest baselines.",
-      "Two-stage design: a classifier flags delay risk, then a separate regressor (trained only on delayed orders) estimates the magnitude, invoked only when risk ≥ 50%.",
-      "Used SHAP to identify the features actually driving delays — seller on-time rate, purchase month, destination-state delay rate, delivery distance, and product-category delay rate — and shipped the model in an interactive Streamlit dashboard with a geographic delay heatmap and real-time prediction page.",
+      "Flags Brazilian Olist orders that will arrive late — and estimates how late — before they ship.",
+    specs: [
+      { label: "Data", value: "100K+ Olist orders against a 6.8% real-world delay rate." },
+      {
+        label: "Model",
+        value:
+          "Two-stage XGBoost: a classifier flags risk, a regressor trained only on late orders estimates magnitude above 50%.",
+      },
+      {
+        label: "Shipped",
+        value: "Streamlit dashboard with SHAP delay drivers, a geographic heatmap, and live prediction.",
+      },
     ],
     tech: ["Python", "XGBoost", "SHAP", "Streamlit", "scikit-learn"],
     repo: "https://github.com/bernice511/delivery_prediction",
-  },
-  {
-    slug: "crisis-aware-dialogue",
-    title: "Crisis-Aware Dialogue: Self-Harm Prevention Classifier",
-    dates: "Northeastern · June 2026",
-    metric: { value: "0.920", label: "F1 at ~1/100th of GPT-5's size" },
-    summary:
-      "A routed, prompt-specialized pipeline for handling distress-signal user input (self-harm, suicide ideation, abuse disclosure), fine-tuning LLaMA 3 on a published benchmark of implicit suicidal-ideation cases for early-intervention systems.",
-    bullets: [
-      "Layer 1: a RoBERTa-base multi-label crisis-type classifier fine-tuned on CRADLEBench (1,308+ clinician-annotated cases across 7 crisis categories), reaching 0.785 macro F1 and 0.920 F1 on the derived flagged/not-flagged signal — within ~2.7 points of GPT-5 alone despite being ~100-500x smaller.",
-      "Layer 3: QLoRA fine-tune of Llama-3.2-1B-Instruct on CRADLE-Dialogue to generate risk-context-conditioned responses, cutting test completion loss by 35% and perplexity by 67% over the base model.",
-      "Wired both layers end-to-end into a Streamlit demo (classifier → risk context → generated response) and documented real failure modes transparently, including a rare childhood-abuse class and an over-therapizing tendency on benign small talk.",
-    ],
-    tech: ["PyTorch", "HuggingFace", "RoBERTa", "Llama 3.2", "QLoRA", "Streamlit"],
-    repo: "https://github.com/bernice511/crisis-aware-dialogue",
-  },
-  {
-    slug: "entiscribe",
-    title: "entiscribe — PDF Entity Extraction & Knowledge Graph",
-    dates: "Side project",
-    metric: { value: "0 keys", label: "Runs fully local — no API keys" },
-    summary:
-      "Upload PDFs, define custom entity types, extract them with an LLM, evaluate extraction quality, and link entities across every uploaded file into an interactive knowledge graph.",
-    bullets: [
-      "End-to-end LangGraph pipelines for ingest (chunk + embed into a local Chroma vector store), extract (retrieve + LLM schema fill), evaluate, and knowledge-graph assembly.",
-      "Evaluation combines gold-standard precision/recall/F1 against a reference CSV with an always-on LLM groundedness judge, merged into a single report.",
-      "Canonicalizes entities that refer to the same real-world thing across files (e.g. \"Apple Inc.\" and \"Apple\"), infers relationships between co-occurring entities, and renders the result as an interactive graph colored by entity type — with zero API keys, since all LLM calls shell out to the local Claude CLI and embeddings run on a bundled local ONNX model.",
-    ],
-    tech: ["Python", "LangGraph", "LangChain", "ChromaDB", "Streamlit", "pypdf"],
-    repo: "https://github.com/bernice511/entiscribe",
   },
   {
     slug: "jobapplier",
@@ -343,11 +384,23 @@ export const projects: Project[] = [
     dates: "Side project",
     metric: { value: "Human-in-loop", label: "Never submits without you" },
     summary:
-      "A semi-automated LinkedIn job-search assistant that tailors resumes and cover letters to real job descriptions with guardrails against fabrication and against unattended submission.",
-    bullets: [
-      "Full automation flow searches LinkedIn for matching roles, tailors a resume and drafts a cover letter per job with Claude, and drives a real headed browser through Easy Apply up to — but never past — a human-confirmed final click; external-site applications are opened with documents ready rather than auto-filled.",
-      "Paste-a-JD web app scores resume fit deterministically from classified keyword matches (not a one-shot LLM judgment), so the score doesn't drift between runs, then generates a tailored resume/cover letter — the tailoring guardrail never lets the model invent an employer, date, skill, or metric that isn't already in the master resume.",
-      "Companion Manifest V3 Chrome extension detects job postings across major ATS platforms and can autofill application forms, deliberately never auto-checking consent boxes or clicking submit.",
+      "Tailors resumes and cover letters to real job descriptions, with guardrails against both fabrication and unattended submission.",
+    specs: [
+      {
+        label: "Guardrail",
+        value:
+          "Tailoring can never invent an employer, date, skill, or metric that isn't already in the master resume.",
+      },
+      {
+        label: "Scoring",
+        value:
+          "Fit scored deterministically from classified keyword matches, so it doesn't drift between runs like a one-shot LLM judgment.",
+      },
+      {
+        label: "Surface",
+        value:
+          "Browser automation that stops at the final human click, a paste-a-JD Flask app, and an MV3 Chrome extension.",
+      },
     ],
     tech: ["Python", "Playwright", "Flask", "Claude", "Chrome Extension (MV3)"],
     repo: "https://github.com/bernice511/jobApplier",
@@ -358,10 +411,15 @@ export const projects: Project[] = [
     dates: "Side project",
     metric: { value: "Prod traces", label: "Replay real Langfuse generations" },
     summary:
-      "A tool for browsing Langfuse traces and re-running any generation's prompt through Claude to compare a new completion against the original in production LLM debugging workflows.",
-    bullets: [
-      "Full-stack TypeScript app (Express + Vite) that lets an engineer pull a real trace from Langfuse and iterate on its prompt without leaving the browser.",
-      "Security-conscious design: the Langfuse secret key is sent once to the server and never re-exposed to the browser, sessions are keyed by an httpOnly cookie, and the CLI used to re-run prompts has all built-in tool access disabled since trace content is untrusted LLM input/output.",
+      "Pull a real production trace out of Langfuse, re-run its prompt, and compare the new completion against the original.",
+    specs: [
+      { label: "Flow", value: "Browse Langfuse traces and iterate on a prompt without leaving the browser." },
+      { label: "Stack", value: "Full-stack TypeScript — Express + Vite, sessions keyed by an httpOnly cookie." },
+      {
+        label: "Security",
+        value:
+          "The Langfuse secret key is never re-exposed to the browser, and the CLI re-running prompts has all tool access disabled since trace content is untrusted.",
+      },
     ],
     tech: ["TypeScript", "React", "Vite", "Express", "Langfuse"],
     repo: "https://github.com/bernice511/prompt-lab",
@@ -370,13 +428,13 @@ export const projects: Project[] = [
     slug: "assistive-device",
     title: "Personal Assistance System for Visually Impaired",
     dates: "Loyola ICAM · Nov 2021 – May 2022",
-    metric: { value: "96.24%", label: "On-device face recognition accuracy" },
+    metric: { value: "96.24%", label: "On-device face recognition" },
     summary:
-      "A Raspberry Pi wearable assistive device combining real-time face recognition, object detection, and obstacle sensing with audio feedback, built as an undergraduate capstone project.",
-    bullets: [
-      "Haar Cascade face recognition reaching 96.24% accuracy, trained and evaluated on-device.",
-      "SSD-based object detection at 1-second latency, trained on 500+ images across 75 people.",
-      "Ultrasonic obstacle sensing to 4 meters with real-time feedback delivered over Bluetooth audio.",
+      "A Raspberry Pi wearable combining face recognition, object detection, and obstacle sensing with audio feedback.",
+    specs: [
+      { label: "Vision", value: "Haar Cascade face recognition plus SSD object detection at 1-second latency." },
+      { label: "Data", value: "Trained and evaluated on-device on 500+ images across 75 people." },
+      { label: "Sensing", value: "Ultrasonic obstacle detection to 4 meters, fed back over Bluetooth audio." },
     ],
     tech: ["Raspberry Pi", "OpenCV", "Haar Cascade", "SSD", "Bluetooth"],
   },

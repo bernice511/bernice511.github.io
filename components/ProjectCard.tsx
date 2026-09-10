@@ -3,8 +3,15 @@ import type { Project } from "@/lib/data";
 export default function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex h-full flex-col p-6">
+      {project.featured && <p className="eyebrow mb-2">Featured</p>}
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h3 className="text-lg font-semibold leading-snug">{project.title}</h3>
+        <h3
+          className={`font-semibold leading-snug ${
+            project.featured ? "text-xl sm:text-2xl" : "text-lg"
+          }`}
+        >
+          {project.title}
+        </h3>
         <span className="font-mono text-xs text-muted">{project.dates}</span>
       </div>
 
@@ -19,17 +26,16 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       <p className="mt-4 text-sm leading-relaxed text-muted">{project.summary}</p>
 
-      <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted">
-        {project.bullets.map((bullet, i) => (
-          <li key={i} className="flex gap-2.5">
-            <span
-              aria-hidden="true"
-              className="mt-[0.5rem] h-1 w-1 shrink-0 rounded-full bg-accent/70"
-            />
-            <span>{bullet}</span>
-          </li>
+      <dl className="mt-5 space-y-2.5 border-t border-border pt-4 text-sm">
+        {project.specs.map((spec) => (
+          <div key={spec.label} className="grid grid-cols-[5.25rem_1fr] gap-3">
+            <dt className="pt-px font-mono text-[0.68rem] uppercase tracking-[0.1em] text-accent/80">
+              {spec.label}
+            </dt>
+            <dd className="leading-relaxed text-muted">{spec.value}</dd>
+          </div>
         ))}
-      </ul>
+      </dl>
 
       <div className="mt-5 flex flex-wrap gap-1.5">
         {project.tech.map((tech) => (
