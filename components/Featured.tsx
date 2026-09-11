@@ -13,7 +13,7 @@ export default function Featured() {
     <section id="prince" className="relative overflow-hidden border-y border-border">
       <div aria-hidden="true" className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
 
-      <div className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20">
+      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
         <Reveal>
           <p className="eyebrow">{featured.eyebrow}</p>
           <div className="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
@@ -52,7 +52,7 @@ export default function Featured() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
           {NARRATIVE.map((item, i) => (
             <Reveal key={item.key} delay={i * 100}>
               <h3 className="eyebrow">{item.label}</h3>
@@ -61,7 +61,7 @@ export default function Featured() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {featured.pillars.map((pillar, i) => (
             <Reveal key={pillar.name} delay={i * 80}>
               <div className="card card-glow h-full p-5">

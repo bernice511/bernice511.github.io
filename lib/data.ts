@@ -158,7 +158,7 @@ export const experience: Experience[] = [
     bullets: [
       {
         heading: "PRINCE — Generative AI (Jan 2024 – Dec 2025)",
-        text: "Led development of the multi-agent system described above — hybrid RAG, Text-to-SQL, metadata extraction, and eval-as-a-CI-gate — in production at Bayer across 18,000+ preclinical safety studies.",
+        text: "Led development of the multi-agent system detailed below — hybrid RAG, Text-to-SQL, metadata extraction, and eval-as-a-CI-gate — in production at Bayer across 18,000+ preclinical safety studies.",
       },
       {
         heading: "PRINCE Data Platform — Data Engineering (Aug 2022 – Dec 2023)",
@@ -294,7 +294,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "entiscribe",
-    title: "entiscribe — PDF Entity Extraction & Knowledge Graph",
+    title: "Entiscribe — PDF Entity Extraction & Knowledge Graph",
     dates: "Side project",
     featured: true,
     metric: { value: "0 keys", label: "Runs fully local" },
@@ -380,7 +380,7 @@ export const projects: Project[] = [
   },
   {
     slug: "jobapplier",
-    title: "jobApplier — AI-Assisted Job Search Platform",
+    title: "Job Applier — AI-Assisted Job Search Platform",
     dates: "Side project",
     metric: { value: "Human-in-loop", label: "Never submits without you" },
     summary:

@@ -17,8 +17,8 @@ export default function Home() {
       <main id="main" className="flex-1">
         <Hero />
         <Stats />
-        <Featured />
         <Experience />
+        <Featured />
         <Projects />
         <Awards />
         <Education />

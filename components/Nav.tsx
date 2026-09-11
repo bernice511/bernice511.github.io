@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { profile } from "@/lib/data";
 import ConfettiButton from "./ConfettiButton";
+import ScrollProgress from "./ScrollProgress";
 
 const links = [
-  { href: "#prince", id: "prince", label: "PRINCE" },
   { href: "#experience", id: "experience", label: "Experience" },
+  { href: "#prince", id: "prince", label: "PRINCE" },
   { href: "#projects", id: "projects", label: "Projects" },
   { href: "#awards", id: "awards", label: "Awards" },
   { href: "#skills", id: "skills", label: "Skills" },
@@ -98,6 +99,7 @@ export default function Nav() {
           </button>
         </div>
       </div>
+      <ScrollProgress />
       {open && (
         <nav id="mobile-menu" className="border-t border-border bg-surface px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4 text-sm">
