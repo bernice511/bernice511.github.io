@@ -53,10 +53,11 @@ export default function Hero() {
               <Magnetic>
                 <ConfettiButton
                   href={profile.resumeHref}
-                  download
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-background shadow-[0_10px_30px_-12px_var(--accent)] transition-colors hover:bg-accent/90"
                 >
-                  Download Resume
+                  View Resume
                 </ConfettiButton>
               </Magnetic>
               <Magnetic>

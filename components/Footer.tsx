@@ -6,7 +6,7 @@ import Magnetic from "./Magnetic";
 const links = [
   { label: "LinkedIn", href: profile.linkedin, external: true },
   { label: "GitHub", href: profile.github, external: true },
-  { label: "Resume (PDF)", href: profile.resumeHref, download: true },
+  { label: "Resume (PDF)", href: profile.resumeHref, external: true },
 ];
 
 export default function Footer() {
@@ -54,7 +54,6 @@ export default function Footer() {
                   key={link.label}
                   href={link.href}
                   {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}
-                  {...(link.download ? { download: true } : {})}
                   className="text-muted transition-colors hover:text-accent"
                 >
                   {link.label}

@@ -74,7 +74,8 @@ export default function Nav() {
         <div className="flex items-center gap-2">
           <ConfettiButton
             href={profile.resumeHref}
-            download
+            target="_blank"
+            rel="noreferrer"
             className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-accent/90"
           >
             Resume
