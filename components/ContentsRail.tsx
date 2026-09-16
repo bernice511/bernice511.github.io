@@ -59,7 +59,7 @@ export default function ContentsRail() {
       aria-label="Contents"
       /* Hugs the left edge of the 64rem column rather than the viewport, so it
          doesn't drift off on wide screens. Falls back to a 1.25rem gutter. */
-      className="fixed top-1/2 left-[max(1.25rem,calc(50%-44rem))] z-30 hidden max-h-[80vh] w-[10.5rem] -translate-y-1/2 overflow-y-auto rail:block"
+      className="fixed top-1/2 left-[max(1.25rem,calc(50%-48rem))] z-30 hidden max-h-[80vh] w-[10.5rem] -translate-y-1/2 overflow-y-auto rail:block"
     >
       <p className="eyebrow border-b border-border-strong pb-2">Contents</p>
 
