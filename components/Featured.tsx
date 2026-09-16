@@ -14,8 +14,8 @@ const NARRATIVE = [
  *  caption, then the narrative in three columns. */
 export default function Featured() {
   return (
-    <section id="prince" className="border-y border-border-strong bg-surface/40">
-      <div className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
+    <section id="prince" className="bg-surface/40">
+      <div className="mx-auto max-w-5xl border-y border-border-strong px-6 py-10 sm:py-14">
         <Reveal>
           <Rule />
           <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">

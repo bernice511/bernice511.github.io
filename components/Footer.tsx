@@ -14,8 +14,8 @@ const links = [
 /** Closing spread plus a colophon line, as a printed piece would end. */
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-border-strong">
-      <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+    <footer id="contact">
+      <div className="mx-auto max-w-5xl border-t border-border-strong px-6 py-12 sm:py-16">
         <Reveal>
           <Rule />
           <p className="eyebrow mt-3">08 — Contact</p>

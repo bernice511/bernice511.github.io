@@ -198,3 +198,56 @@ html {
 .no-js-visible {
   opacity: 1 !important;
 }
+
+/* ---------- print ----------
+   Recruiters do print these. Drop the furniture, force every collapsed panel
+   open so nothing is lost on paper, and keep entries off page breaks. */
+
+@media print {
+  html { scroll-padding-top: 0; }
+
+  body::before { display: none; }          /* paper grain */
+
+  header,                                   /* sticky masthead */
+  nav[aria-label="Contents"],               /* fixed rail */
+  section[aria-label="Contents"],           /* in-flow contents */
+  a[aria-label="Back to top"],
+  .skip-link {
+    display: none !important;
+  }
+
+  /* Collapsed detail panels, scroll-driven diagram steps and filter dimming
+     are all inline/attribute driven — override them so the page prints whole. */
+  .reveal { opacity: 1 !important; }
+  #prince svg g, #prince svg path, #projects > div > div { opacity: 1 !important; }
+
+  /* Hover-revealed award descriptions */
+  #awards .grid { grid-template-rows: 1fr !important; opacity: 1 !important; }
+
+  article, figure, li { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  section { break-before: auto; }
+
+  /* Spell out link targets, as a printed document should. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-mono), monospace;
+    font-size: 0.7em;
+    color: var(--muted);
+    word-break: break-all;
+  }
+  nav a[href^="http"]::after { content: ""; }
+
+  @page { margin: 16mm 14mm; }
+}
+
+/* Tailwind's preflight sets `[hidden] { display: none !important }` inside
+   @layer base. For !important declarations layer order is inverted, so an
+   unlayered override loses no matter how specific it is — this has to live in
+   the same layer, after it. */
+@layer base {
+  @media print {
+    [hidden] { display: block !important; }
+    li[hidden] { display: list-item !important; }
+  }
+}

@@ -18,7 +18,7 @@ export default function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
+    <section id={id} className="mx-auto max-w-5xl px-6 py-8 sm:py-12">
       <Reveal>
         <Rule />
         <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">

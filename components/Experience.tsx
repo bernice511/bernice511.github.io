@@ -39,7 +39,7 @@ export default function Experience() {
                           hidden={!visible}
                           className="pl-5 -indent-5 motion-safe:transition-opacity motion-safe:duration-300"
                         >
-                          <span aria-hidden="true" className="text-border-strong">—&nbsp;&nbsp;</span>
+                          <span aria-hidden="true" className="text-muted/60">—&nbsp;&nbsp;</span>
                           {b.heading && (
                             <span className="font-medium text-foreground">{b.heading}. </span>
                           )}

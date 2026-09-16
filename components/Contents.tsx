@@ -47,7 +47,7 @@ export default function Contents() {
   const row = "grid gap-x-6 gap-y-1 py-3 md:grid-cols-[3rem_14rem_1fr]";
 
   return (
-    <section aria-label="Contents" className="mx-auto max-w-5xl px-6 py-10 sm:py-14 rail:hidden">
+    <section aria-label="Contents" className="mx-auto max-w-5xl px-6 py-8 sm:py-10 rail:hidden">
       <Reveal>
         <Rule />
         <p className="eyebrow mt-3">Contents</p>

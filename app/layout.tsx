@@ -75,6 +75,43 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{`.reveal { opacity: 1 !important; }`}</style>
         </noscript>
+        {/* Person schema, so a name search can attribute the page correctly. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: profile.name,
+              alternateName: profile.shortName,
+              jobTitle: profile.title,
+              description: profile.tagline,
+              email: `mailto:${profile.email}`,
+              url: siteUrl,
+              image: `${siteUrl}${asset("/headshot.jpg")}`,
+              sameAs: [profile.linkedin, profile.github],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Boston",
+                addressRegion: "MA",
+                addressCountry: "US",
+              },
+              alumniOf: [
+                { "@type": "CollegeOrUniversity", name: "Northeastern University" },
+                { "@type": "CollegeOrUniversity", name: "Loyola ICAM College of Engineering and Technology" },
+              ],
+              worksFor: { "@type": "Organization", name: "Thoughtworks" },
+              knowsAbout: [
+                "Generative AI",
+                "Large Language Models",
+                "Retrieval-Augmented Generation",
+                "Multi-agent Systems",
+                "LangGraph",
+                "Text-to-SQL",
+              ],
+            }),
+          }}
+        />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
