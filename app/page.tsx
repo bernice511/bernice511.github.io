@@ -9,11 +9,14 @@ import Awards from "@/components/Awards";
 import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import FilterProvider from "@/components/FilterProvider";
+import SectionIndicator from "@/components/SectionIndicator";
 
 export default function Home() {
   return (
-    <>
+    <FilterProvider>
       <Nav />
+      <SectionIndicator />
       <main id="main" className="flex-1">
         <Hero />
         <Stats />
@@ -26,6 +29,6 @@ export default function Home() {
       </main>
       <Footer />
       <BackToTop />
-    </>
+    </FilterProvider>
   );
 }

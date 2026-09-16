@@ -3,6 +3,7 @@ import { profile, trustBar } from "@/lib/data";
 import Reveal from "./Reveal";
 import Rule from "./Rule";
 import WordReveal from "./WordReveal";
+import Parallax from "./Parallax";
 
 const socials = [
   { label: "Email", href: `mailto:${profile.email}` },
@@ -79,7 +80,8 @@ export default function Hero() {
 
         {/* Portrait as a plate with a printed caption underneath. */}
         <Reveal className="order-first lg:order-none">
-          <figure className="w-[clamp(10rem,40vw,17rem)] lg:w-full">
+          <Parallax>
+            <figure className="w-[clamp(10rem,40vw,17rem)] lg:w-full">
             <Image
               src={profile.photo}
               alt={`${profile.name}, ${profile.title}`}
@@ -89,10 +91,11 @@ export default function Hero() {
               sizes="(min-width: 1024px) 17rem, 60vw"
               className="aspect-[5/6] w-full border border-border object-cover object-top"
             />
-            <figcaption className="meta mt-2 border-t border-border pt-2">
-              {profile.name.split(" ")[0]} · {profile.location}
-            </figcaption>
-          </figure>
+              <figcaption className="meta mt-2 border-t border-border pt-2">
+                {profile.name.split(" ")[0]} · {profile.location}
+              </figcaption>
+            </figure>
+          </Parallax>
         </Reveal>
       </div>
 

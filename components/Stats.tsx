@@ -1,5 +1,6 @@
 import { stats } from "@/lib/data";
 import Reveal from "./Reveal";
+import StatCounter from "./StatCounter";
 
 /** Figures set as a ruled table — the numbers are static, no count-up. */
 export default function Stats() {
@@ -13,9 +14,7 @@ export default function Stats() {
               className="border-b border-border px-0 py-5 sm:border-b-0 sm:pr-5"
             >
               <dt className="display text-[2.25rem] text-accent sm:text-[2.6rem]">
-                {stat.prefix}
-                {stat.value.toLocaleString()}
-                {stat.suffix}
+                <StatCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
               </dt>
               <dd className="mt-1.5 text-[0.8125rem] leading-snug text-muted">{stat.label}</dd>
             </div>

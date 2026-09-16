@@ -2,6 +2,8 @@ import { profile } from "@/lib/data";
 import CopyButton from "./CopyButton";
 import Reveal from "./Reveal";
 import Rule from "./Rule";
+import Magnetic from "./Magnetic";
+import LiveClock from "./LiveClock";
 
 const links = [
   { label: "LinkedIn", href: profile.linkedin },
@@ -28,17 +30,22 @@ export default function Footer() {
             evaluate an LLM pipeline you can actually trust.
           </p>
 
-          <p className="eyebrow mt-6">{profile.availability}</p>
+          <p className="mt-6 flex flex-wrap items-baseline gap-x-5 gap-y-1">
+            <span className="eyebrow">{profile.availability}</span>
+            <LiveClock />
+          </p>
         </Reveal>
 
         <Reveal>
           <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3">
-            <a
-              href={`mailto:${profile.email}`}
-              className="display border-b-2 border-foreground pb-1 text-2xl transition-colors hover:border-accent hover:text-accent sm:text-3xl"
-            >
-              {profile.email}
-            </a>
+            <Magnetic>
+              <a
+                href={`mailto:${profile.email}`}
+                className="display border-b-2 border-foreground pb-1 text-2xl transition-colors hover:border-accent hover:text-accent sm:text-3xl"
+              >
+                {profile.email}
+              </a>
+            </Magnetic>
             <CopyButton value={profile.email} />
           </div>
         </Reveal>
