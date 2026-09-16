@@ -30,11 +30,14 @@ export const profile = {
   resumeHref: asset("/resume.pdf"),
 };
 
-/** Logos-as-text row under the hero CTAs — instant credibility scan. */
+/** Logos-as-text row under the hero CTAs — instant credibility scan.
+ *  Employer first. Bayer is the client of the Thoughtworks engagement, not an
+ *  employer, and the row has to say so — it sits directly under the about text
+ *  where a recruiter will read it as employment otherwise. */
 export const trustBar: { name: string; note: string }[] = [
-  { name: "Bayer", note: "GenAI in production" },
-  { name: "Thoughtworks", note: "Sr. Consultant" },
-  { name: "Northeastern", note: "MS in AI" },
+  { name: "Thoughtworks", note: "Sr. Consultant — Data Engineer" },
+  { name: "Bayer", note: "Client — GenAI in production" },
+  { name: "Northeastern", note: "MS in AI · Research Assistant" },
 ];
 
 export type Stat = {
