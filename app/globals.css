@@ -33,6 +33,7 @@
   --color-accent-2: var(--accent-2);
   --color-accent-3: var(--accent-3);
   --color-accent-soft: var(--accent-soft);
+  --breakpoint-rail: 1440px;
   --font-sans: var(--font-inter-tight);
   --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-plex-mono);

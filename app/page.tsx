@@ -11,13 +11,13 @@ import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import FilterProvider from "@/components/FilterProvider";
-import SectionIndicator from "@/components/SectionIndicator";
+import ContentsRail from "@/components/ContentsRail";
 
 export default function Home() {
   return (
     <FilterProvider>
       <Nav />
-      <SectionIndicator />
+      <ContentsRail />
       <main id="main" className="flex-1">
         <Hero />
         <Stats />

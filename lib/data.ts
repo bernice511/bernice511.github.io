@@ -280,6 +280,8 @@ export const skills = {
 export type Project = {
   slug: string;
   title: string;
+  /** Abbreviated title for the contents rail, where the column is ~10rem wide. */
+  short: string;
   dates: string;
   /** Headline outcome, shown large so it survives a 3-second scan. */
   metric?: { value: string; label: string };
@@ -297,6 +299,7 @@ export const projects: Project[] = [
   {
     slug: "entiscribe",
     title: "Entiscribe — PDF Entity Extraction & Knowledge Graph",
+    short: "Entiscribe",
     dates: "Side project",
     featured: true,
     metric: { value: "0 keys", label: "Runs fully local" },
@@ -329,6 +332,7 @@ export const projects: Project[] = [
   {
     slug: "crisis-aware-dialogue",
     title: "Crisis-Aware Dialogue: Self-Harm Prevention Classifier",
+    short: "Crisis-Aware Dialogue",
     dates: "Northeastern · June 2026",
     featured: true,
     metric: { value: "0.920", label: "F1 at ~1/100th of GPT-5's size" },
@@ -361,6 +365,7 @@ export const projects: Project[] = [
   {
     slug: "delivery-delay-prediction",
     title: "E-Commerce Delivery Delay Prediction",
+    short: "Delivery Delay",
     dates: "Northeastern · Apr 2026",
     metric: { value: "0.922", label: "ROC-AUC on 100K+ orders" },
     summary:
@@ -383,6 +388,7 @@ export const projects: Project[] = [
   {
     slug: "jobapplier",
     title: "Job Applier — AI-Assisted Job Search Platform",
+    short: "Job Applier",
     dates: "Side project",
     metric: { value: "Human-in-loop", label: "Never submits without you" },
     summary:
@@ -410,6 +416,7 @@ export const projects: Project[] = [
   {
     slug: "prompt-lab",
     title: "Prompt Playground",
+    short: "Prompt Playground",
     dates: "Side project",
     metric: { value: "Prod traces", label: "Replay real Langfuse generations" },
     summary:
@@ -429,6 +436,7 @@ export const projects: Project[] = [
   {
     slug: "assistive-device",
     title: "Personal Assistance System for Visually Impaired",
+    short: "Assistive Device",
     dates: "Loyola ICAM · Nov 2021 – May 2022",
     metric: { value: "96.24%", label: "On-device face recognition" },
     summary:
