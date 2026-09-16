@@ -22,7 +22,23 @@ export default function ProjectCard({
             project.featured ? "display text-2xl" : "text-lg font-medium"
           }`}
         >
-          {project.title}
+          {project.repo ? (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+              className="link-rule decoration-transparent transition-colors hover:text-accent"
+            >
+              {project.title}
+              {/* Always visible, not hover-only — on touch there is no hover to reveal it. */}
+              <span aria-hidden="true" className="ml-1.5 inline-block text-[0.7em] align-baseline text-muted">
+                ↗
+              </span>
+              <span className="sr-only"> — view code on GitHub</span>
+            </a>
+          ) : (
+            project.title
+          )}
         </h3>
         <p className="meta mt-1">{project.dates}</p>
 

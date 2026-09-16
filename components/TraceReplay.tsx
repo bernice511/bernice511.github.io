@@ -6,6 +6,7 @@ import { TRACE, TRACE_QUESTION, TRACE_TOTAL_MS } from "@/lib/trace";
 /** Replays a recorded trace a stage at a time. Set as a printed ledger:
  *  ruled rows, tabular timings, no chrome. */
 export default function TraceReplay() {
+  const [open, setOpen] = useState(false);
   const [cursor, setCursor] = useState(-1);
   const [playing, setPlaying] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -51,13 +52,45 @@ export default function TraceReplay() {
   const elapsed = TRACE.slice(0, cursor + 1).reduce((sum, s) => sum + s.ms, 0);
   const done = cursor >= TRACE.length - 1;
 
+  // Closed, this costs a single line — the depth is here for whoever wants it,
+  // but it never stands between a scanning reader and the work below.
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-expanded={false}
+        className="panel panel-link flex w-full flex-wrap items-baseline justify-between gap-x-6 gap-y-1 bg-background px-5 py-4 text-left"
+      >
+        <span className="eyebrow">Trace replay — recorded run</span>
+        <span className="text-[0.9375rem] font-medium">
+          Watch one question move through the pipeline{" "}
+          <span aria-hidden="true">↓</span>
+        </span>
+      </button>
+    );
+  }
+
   return (
     <div className="panel bg-background p-5 sm:p-7">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
         <p className="eyebrow">Trace replay — recorded run</p>
-        <p className="meta tabular-nums">
-          {elapsed.toLocaleString()} / {TRACE_TOTAL_MS.toLocaleString()} ms
-        </p>
+        <div className="flex items-baseline gap-4">
+          <p className="meta tabular-nums">
+            {elapsed.toLocaleString()} / {TRACE_TOTAL_MS.toLocaleString()} ms
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false);
+              setOpen(false);
+            }}
+            aria-expanded
+            className="eyebrow transition-colors hover:text-accent"
+          >
+            Close ×
+          </button>
+        </div>
       </div>
 
       <p className="display mt-3 max-w-2xl text-[1.5rem] leading-[1.2] sm:text-[1.75rem]">
