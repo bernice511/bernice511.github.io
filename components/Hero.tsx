@@ -82,6 +82,7 @@ export default function Hero() {
         <Reveal className="order-first lg:order-none">
           <Parallax>
             <figure className="w-[clamp(10rem,40vw,17rem)] lg:w-full">
+              <div className="plate">
             <Image
               src={profile.photo}
               alt={`${profile.name}, ${profile.title}`}
@@ -89,9 +90,10 @@ export default function Hero() {
               height={1100}
               preload
               sizes="(min-width: 1024px) 17rem, 60vw"
-              className="aspect-[5/6] w-full border-y border-border-strong object-cover object-top"
+              className="aspect-[5/6] w-full object-cover object-top"
             />
-              <figcaption className="meta mt-2.5">
+              </div>
+              <figcaption className="meta mt-4">
                 {profile.name.split(" ")[0]} · {profile.location}
               </figcaption>
             </figure>

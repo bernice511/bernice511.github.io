@@ -122,6 +122,38 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- portrait plate ----------
+   Corner brackets at top-left and bottom-right, offset just clear of the
+   image so they read as registration marks framing a plate rather than as a
+   box drawn around it. */
+
+.plate {
+  position: relative;
+}
+
+.plate::before,
+.plate::after {
+  content: "";
+  position: absolute;
+  width: 2.25rem;
+  height: 2.25rem;
+  pointer-events: none;
+}
+
+.plate::before {
+  top: -0.625rem;
+  left: -0.625rem;
+  border-top: 1px solid var(--border-strong);
+  border-left: 1px solid var(--border-strong);
+}
+
+.plate::after {
+  right: -0.625rem;
+  bottom: -0.625rem;
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+}
+
 /* ---------- rules ---------- */
 
 .rule {
