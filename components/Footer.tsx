@@ -1,6 +1,7 @@
 import { profile } from "@/lib/data";
 import CopyButton from "./CopyButton";
 import Reveal from "./Reveal";
+import Rule from "./Rule";
 
 const links = [
   { label: "LinkedIn", href: profile.linkedin },
@@ -14,7 +15,7 @@ export default function Footer() {
     <footer id="contact" className="border-t border-border-strong">
       <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
         <Reveal>
-          <div className="rule-ink" />
+          <Rule />
           <p className="eyebrow mt-3">08 — Contact</p>
 
           <h2 className="display mt-8 max-w-2xl text-[2.75rem] sm:text-[3.75rem]">

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { profile, trustBar } from "@/lib/data";
 import Reveal from "./Reveal";
+import Rule from "./Rule";
+import WordReveal from "./WordReveal";
 
 const socials = [
   { label: "Email", href: `mailto:${profile.email}` },
@@ -12,7 +14,7 @@ export default function Hero() {
   return (
     <section id="top" className="mx-auto max-w-5xl px-6 pt-10 pb-4 sm:pt-16">
       <Reveal>
-        <div className="rule-ink" />
+        <Rule />
         <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <p className="eyebrow">01 — Introduction</p>
           <p className="eyebrow">{profile.location}</p>
@@ -27,11 +29,15 @@ export default function Hero() {
             <h1 className="meta not-italic">{profile.name}</h1>
 
             <p className="display mt-4 text-[2.9rem] sm:text-[4.15rem]">
-              {profile.headlineLead}{" "}
-              <em className="display-italic text-accent">{profile.headlineEmphasis}</em>
+              <WordReveal text={profile.headlineLead} delay={120} />
+              <WordReveal
+                text={profile.headlineEmphasis}
+                className="display-italic text-accent"
+                delay={120 + profile.headlineLead.split(" ").length * 45}
+              />
             </p>
 
-            <div className="rule mt-7" />
+            <Rule className="rule mt-7" />
             <p className="eyebrow mt-3">
               {profile.title} · {profile.availability}
             </p>

@@ -10,9 +10,11 @@ export default function Experience() {
       <div className="divide-y divide-border border-t border-border">
         {experience.map((job) => (
           <Reveal key={job.org}>
-            <article className="grid gap-x-8 gap-y-3 py-8 md:grid-cols-[13rem_1fr]">
+            <article className="group grid gap-x-8 gap-y-3 py-8 md:grid-cols-[13rem_1fr]">
               <div>
-                <h3 className="text-lg font-medium leading-snug">{job.org}</h3>
+                <h3 className="text-lg font-medium leading-snug motion-safe:transition-transform motion-safe:duration-300 md:group-hover:translate-x-1">
+                  {job.org}
+                </h3>
                 <p className="display-italic mt-0.5 text-[1.0625rem] text-accent">{job.role}</p>
                 <p className="meta mt-1.5">{job.dates}</p>
                 <p className="meta">{job.location}</p>

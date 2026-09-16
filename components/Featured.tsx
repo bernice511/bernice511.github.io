@@ -1,6 +1,8 @@
 import { featured } from "@/lib/data";
 import Reveal from "./Reveal";
 import AgentGraph from "./AgentGraph";
+import TraceReplay from "./TraceReplay";
+import Rule from "./Rule";
 
 const NARRATIVE = [
   { label: "Problem", key: "problem" },
@@ -15,7 +17,7 @@ export default function Featured() {
     <section id="prince" className="border-y border-border-strong bg-surface/40">
       <div className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
         <Reveal>
-          <div className="rule-ink" />
+          <Rule />
           <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
             <p className="eyebrow">03 — {featured.eyebrow}</p>
             <p className="meta">{featured.dates}</p>
@@ -55,6 +57,13 @@ export default function Featured() {
               names.
             </figcaption>
           </figure>
+        </Reveal>
+
+        {/* Recorded run of the pipeline above, replayable in the page. */}
+        <Reveal>
+          <div className="mt-12">
+            <TraceReplay />
+          </div>
         </Reveal>
 
         {/* Narrative in three columns, as a feature well. */}

@@ -4,10 +4,14 @@ import type { Project } from "@/lib/data";
  *  display type, specs as a definition table. */
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="grid gap-x-8 gap-y-4 py-8 md:grid-cols-[13rem_1fr]">
+    <article className="group grid gap-x-8 gap-y-4 py-8 transition-colors duration-300 md:grid-cols-[13rem_1fr]">
       <div>
         {project.featured && <p className="eyebrow text-accent">Featured</p>}
-        <h3 className={`mt-1 leading-snug ${project.featured ? "display text-2xl" : "text-lg font-medium"}`}>
+        <h3
+          className={`mt-1 leading-snug motion-safe:transition-transform motion-safe:duration-300 md:group-hover:translate-x-1 ${
+            project.featured ? "display text-2xl" : "text-lg font-medium"
+          }`}
+        >
           {project.title}
         </h3>
         <p className="meta mt-1">{project.dates}</p>

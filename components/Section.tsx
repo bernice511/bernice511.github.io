@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Reveal from "./Reveal";
+import Rule from "./Rule";
 
 /** Numbered section head: rule, number + title on one line, kicker right-aligned.
  *  The running number is what gives the page its editorial spine. */
@@ -19,7 +20,7 @@ export default function Section({
   return (
     <section id={id} className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
       <Reveal>
-        <div className="rule-ink" />
+        <Rule />
         <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h2 className="flex items-baseline gap-4">
             <span className="eyebrow">{index}</span>
