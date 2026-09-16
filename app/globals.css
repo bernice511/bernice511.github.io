@@ -122,26 +122,6 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- portrait ----------
-   The photograph is cool-toned (grey-blue glass, cool ceiling light) and the
-   page is warm, so it reads as borrowed. Warm monochrome puts it in the same
-   temperature as the paper, the way a printed publication runs a portrait.
-   Hovering returns the original, so the real photo is never hidden. */
-
-.portrait {
-  filter: grayscale(1) sepia(0.32) contrast(1.06) brightness(1.02);
-  transition: filter 0.5s ease;
-}
-
-figure:hover .portrait,
-figure:focus-within .portrait {
-  filter: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .portrait { transition: none; }
-}
-
 /* ---------- rules ---------- */
 
 .rule {
