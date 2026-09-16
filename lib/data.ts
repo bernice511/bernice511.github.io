@@ -300,6 +300,48 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "newsroomfeed",
+    title: "NewsroomFeed — Hyperlocal AI Newsroom",
+    short: "NewsroomFeed",
+    dates: "AIMES Lab, Northeastern · Jul 2026 – Present",
+    featured: true,
+    metric: { value: "340 tests", label: "across ingest, triage and connectors" },
+    summary:
+      "An agentic pipeline that turns live civic data — traffic, weather, 311 — into station-branded hyperlocal news, with a journalist approving every item before it publishes.",
+    specs: [
+      {
+        label: "Pipeline",
+        value:
+          "A LangGraph graph (ingestion → triage) merges traffic and weather into one event list before anything is scored, so cross-domain stories compete on the same scale.",
+      },
+      {
+        label: "Sources",
+        value:
+          "Genuinely keyless live feeds: MassDOT's WZDx v4.1 work-zone GeoJSON and Event Reporting System XML, NWS active alerts, and Boston 311. A connector without an approved key is skipped and logged — never backfilled with mock data, so a live run only ever contains real events.",
+      },
+      {
+        label: "Triage",
+        value:
+          "Newsworthiness is severity × likelihood — the ISO 31000 / FEMA risk formula rather than an arbitrary weighted sum — grounded per domain in NWS CAP severity, FHWA duration classes and the Travel Time Index.",
+      },
+      {
+        label: "Restraint",
+        value:
+          "The scorer ships switched off until it is calibrated against labelled editorial judgment: the structure is grounded, the thresholds are not yet validated, and the code says so.",
+      },
+      {
+        label: "Surface",
+        value:
+          "Next.js PWA — geolocated feed, Leaflet maps, commute-route alerts, community reports with crowd verification, and an editorial review queue.",
+      },
+      {
+        label: "Access",
+        value: "Lab research code, so the repository is private. Happy to walk through it.",
+      },
+    ],
+    tech: ["Python", "LangGraph", "Claude", "Pydantic", "httpx", "Next.js", "React Leaflet"],
+  },
+  {
     slug: "entiscribe",
     title: "Entiscribe — PDF Entity Extraction & Knowledge Graph",
     short: "Entiscribe",
