@@ -135,23 +135,23 @@ html {
 .plate::after {
   content: "";
   position: absolute;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 3.75rem;
+  height: 3.75rem;
   pointer-events: none;
 }
 
 .plate::before {
   top: -0.625rem;
   left: -0.625rem;
-  border-top: 1px solid var(--border-strong);
-  border-left: 1px solid var(--border-strong);
+  border-top: 1px solid var(--muted);
+  border-left: 1px solid var(--muted);
 }
 
 .plate::after {
   right: -0.625rem;
   bottom: -0.625rem;
-  border-right: 1px solid var(--border-strong);
-  border-bottom: 1px solid var(--border-strong);
+  border-right: 1px solid var(--muted);
+  border-bottom: 1px solid var(--muted);
 }
 
 /* ---------- rules ---------- */
