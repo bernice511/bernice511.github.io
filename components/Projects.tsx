@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import ProjectCard from "./ProjectCard";
@@ -9,8 +8,7 @@ import { princeUses, projectsFor } from "@/lib/skill-index";
 import { useFilter } from "./FilterProvider";
 
 export default function Projects() {
-  const { activeSkill, clear } = useFilter();
-  const [open, setOpen] = useState<string | null>(null);
+  const { activeSkill, clear, openProject, setOpenProject } = useFilter();
 
   const matching = activeSkill ? new Set(projectsFor(activeSkill).map((p) => p.slug)) : null;
   const count = matching?.size ?? projects.length;
@@ -41,13 +39,16 @@ export default function Projects() {
           return (
             <Reveal key={project.slug}>
               <div
-                className="motion-safe:transition-opacity motion-safe:duration-500"
+                id={project.slug}
+                className="scroll-mt-28 motion-safe:transition-opacity motion-safe:duration-500"
                 style={{ opacity: dimmed ? 0.25 : 1 }}
               >
                 <ProjectCard
                   project={project}
-                  expanded={open === project.slug}
-                  onToggle={() => setOpen(open === project.slug ? null : project.slug)}
+                  expanded={openProject === project.slug}
+                  onToggle={() =>
+                    setOpenProject(openProject === project.slug ? null : project.slug)
+                  }
                 />
               </div>
             </Reveal>

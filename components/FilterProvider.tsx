@@ -6,12 +6,17 @@ type FilterState = {
   activeSkill: string | null;
   toggleSkill: (skill: string) => void;
   clear: () => void;
+  /** slug of the project whose detail panel is open, if any */
+  openProject: string | null;
+  setOpenProject: (slug: string | null) => void;
 };
 
 const Ctx = createContext<FilterState>({
   activeSkill: null,
   toggleSkill: () => {},
   clear: () => {},
+  openProject: null,
+  setOpenProject: () => {},
 });
 
 export const useFilter = () => useContext(Ctx);
@@ -20,6 +25,7 @@ export const useFilter = () => useContext(Ctx);
  *  so Skills can drive Projects without prop-drilling through the page. */
 export default function FilterProvider({ children }: { children: ReactNode }) {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const [openProject, setOpenProject] = useState<string | null>(null);
 
   const toggleSkill = useCallback((skill: string) => {
     setActiveSkill((current) => {
@@ -41,5 +47,9 @@ export default function FilterProvider({ children }: { children: ReactNode }) {
 
   const clear = useCallback(() => setActiveSkill(null), []);
 
-  return <Ctx.Provider value={{ activeSkill, toggleSkill, clear }}>{children}</Ctx.Provider>;
+  return (
+    <Ctx.Provider value={{ activeSkill, toggleSkill, clear, openProject, setOpenProject }}>
+      {children}
+    </Ctx.Provider>
+  );
 }
