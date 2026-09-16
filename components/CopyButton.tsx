@@ -20,9 +20,9 @@ export default function CopyButton({ value }: { value: string }) {
       type="button"
       onClick={handleCopy}
       aria-label={`Copy ${value} to clipboard`}
-      className="text-muted transition-colors hover:text-foreground"
+      className="eyebrow transition-colors hover:text-foreground"
     >
-      {copied ? "Copied!" : "Copy"}
+      {copied ? "Copied" : "Copy address"}
     </button>
   );
 }

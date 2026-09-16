@@ -2,24 +2,19 @@ import Section from "./Section";
 import Reveal from "./Reveal";
 import { skills } from "@/lib/data";
 
+/** Set as an index: category in caption caps, terms as running text separated
+ *  by thin rules. No tag pills. */
 export default function Skills() {
   return (
-    <Section id="skills" title="Skills">
-      <div className="grid gap-5 md:grid-cols-3">
-        {Object.entries(skills).map(([category, items], i) => (
-          <Reveal key={category} delay={i * 100} className="h-full">
-            <div className="card h-full p-5">
-              <h3 className="eyebrow">{category}</h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-border bg-surface-2 px-3 py-1 text-sm transition-colors hover:border-accent/60 hover:text-accent"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+    <Section id="skills" index="07" title="Skills">
+      <div className="divide-y divide-border border-t border-border">
+        {Object.entries(skills).map(([category, items]) => (
+          <Reveal key={category}>
+            <div className="grid gap-x-8 gap-y-2 py-5 md:grid-cols-[13rem_1fr]">
+              <h3 className="eyebrow pt-1">{category}</h3>
+              <p className="text-[0.9375rem] leading-[1.7] text-muted">
+                {items.join(" · ")}
+              </p>
             </div>
           </Reveal>
         ))}

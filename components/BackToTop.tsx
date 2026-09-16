@@ -18,17 +18,9 @@ export default function BackToTop() {
     <a
       href="#top"
       aria-label="Back to top"
-      className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface text-foreground shadow-lg transition-colors hover:border-accent hover:text-accent"
+      className="fixed bottom-6 right-6 z-40 border border-border-strong bg-background px-3 py-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-muted transition-colors hover:border-foreground hover:text-foreground"
     >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path
-          d="M8 13V3M3 7L8 2L13 7"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      ↑ Top
     </a>
   );
 }

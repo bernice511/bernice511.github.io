@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { asset, profile } from "@/lib/data";
-import AuroraBackground from "@/components/AuroraBackground";
-import CustomCursor from "@/components/CustomCursor";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/* Display face for headlines — high-contrast transitional serif. */
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+});
+
+/* Captions, dates, spec labels. */
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
@@ -59,16 +67,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${interTight.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {/* Reveal() starts at opacity-0 and is un-hidden by IntersectionObserver.
             Without JS there is no observer, so force everything visible. */}
         <noscript>
-          <style>{`.reveal { opacity: 1 !important; transform: none !important; }`}</style>
+          <style>{`.reveal { opacity: 1 !important; }`}</style>
         </noscript>
-        <AuroraBackground />
-        <CustomCursor />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

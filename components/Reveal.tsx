@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+/** Opacity-only fade as content enters. No translate, no stagger — the layout
+ *  should read as set type, not as something assembling itself. */
 export default function Reveal({
   children,
-  delay = 0,
   className = "",
 }: {
   children: ReactNode;
-  delay?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     observer.observe(el);
@@ -35,10 +35,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`reveal motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      } ${className}`}
-      style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
+      className={`reveal ${visible ? "opacity-100" : "opacity-0"} ${className}`}
     >
       {children}
     </div>

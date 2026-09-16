@@ -1,22 +1,27 @@
 import { stats } from "@/lib/data";
-import StatCounter from "./StatCounter";
 import Reveal from "./Reveal";
 
+/** Figures set as a ruled table — the numbers are static, no count-up. */
 export default function Stats() {
   return (
-    <section aria-label="Impact at a glance" className="mx-auto max-w-6xl px-6">
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
-        {stats.map((stat, i) => (
-          <Reveal key={stat.label} delay={i * 90} className="bg-background">
-            <div className="h-full bg-surface/60 px-5 py-7 text-center">
-              <p className="text-3xl font-semibold tracking-tight text-accent sm:text-4xl">
-                <StatCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-              </p>
-              <p className="mt-2 text-xs leading-snug text-muted">{stat.label}</p>
+    <section aria-label="Impact at a glance" className="mx-auto max-w-5xl px-6 py-6">
+      <Reveal>
+        <dl className="grid grid-cols-2 border-t border-border-strong sm:grid-cols-4">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="border-b border-border px-0 py-5 sm:border-b-0 sm:pr-5"
+            >
+              <dt className="display text-[2.25rem] text-accent sm:text-[2.6rem]">
+                {stat.prefix}
+                {stat.value.toLocaleString()}
+                {stat.suffix}
+              </dt>
+              <dd className="mt-1.5 text-[0.8125rem] leading-snug text-muted">{stat.label}</dd>
             </div>
-          </Reveal>
-        ))}
-      </div>
+          ))}
+        </dl>
+      </Reveal>
     </section>
   );
 }

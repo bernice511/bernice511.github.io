@@ -14,8 +14,10 @@ export const profile = {
   location: "Boston, MA",
   photo: asset("/headshot.jpg"),
   availability: "Open to Spring 2027 Agentic AI internships",
-  /** One-line hook. This is the only sentence most recruiters will read. */
-  headline: "I build production LLM systems that people actually use.",
+  /** One-line hook. This is the only sentence most recruiters will read.
+   *  Split so the hero can set the second clause in italic display type. */
+  headlineLead: "I build production LLM systems that",
+  headlineEmphasis: "people actually use.",
   /** Two-line supporting proof, shown directly under the headline. */
   subhead:
     "2+ years shipping multi-agent GenAI at Bayer with Thoughtworks — RAG, Text-to-SQL, and NER running against 18,000+ preclinical safety studies. Now an MS in AI student at Northeastern.",

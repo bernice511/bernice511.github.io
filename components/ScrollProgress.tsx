@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-/** Thin fill across the bottom edge of the sticky header, so a reader can tell
+/** Thin ink fill across the bottom edge of the masthead, so a reader can tell
  *  how much of a long single-page site is left. */
 export default function ScrollProgress() {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ export default function ScrollProgress() {
     <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-transparent">
       <div
         ref={ref}
-        className="h-full origin-left bg-gradient-to-r from-accent to-accent-2"
+        className="h-full origin-left bg-accent"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

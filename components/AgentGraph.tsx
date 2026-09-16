@@ -29,7 +29,7 @@ type GEdge = {
 
 const TONE: Record<Tone, { fill: string; stroke: string; text: string }> = {
   neutral: { fill: "var(--surface-2)", stroke: "var(--border-strong)", text: "var(--muted)" },
-  core: { fill: "var(--surface)", stroke: "var(--accent)", text: "var(--foreground)" },
+  core: { fill: "var(--accent-soft)", stroke: "var(--accent)", text: "var(--foreground)" },
   tool: {
     fill: "var(--surface)",
     stroke: "color-mix(in oklab, var(--accent-2) 60%, transparent)",
@@ -120,14 +120,6 @@ function Edges({ edges }: { edges: GEdge[] }) {
             className="graph-edge"
             strokeDasharray={edge.dashed ? "4 4" : undefined}
           />
-          {!edge.dashed && (
-            <path
-              d={edge.d}
-              pathLength={100}
-              className="graph-pulse"
-              style={{ animationDelay: `${edge.delay}s` }}
-            />
-          )}
           {edge.label && (
             <text
               x={edge.lx}
@@ -146,34 +138,19 @@ function Edges({ edges }: { edges: GEdge[] }) {
   );
 }
 
-function Nodes({ nodes, offset = 0 }: { nodes: GNode[]; offset?: number }) {
+function Nodes({ nodes }: { nodes: GNode[] }) {
   return (
     <>
-      {nodes.map((node, i) => {
+      {nodes.map((node) => {
         const tone = TONE[node.tone];
         const cx = node.x + node.w / 2;
         return (
-          <g key={node.label + node.x} className="graph-node" style={{ animationDelay: `${(i + offset) * 0.2}s` }}>
-            {node.tone === "core" && (
-              <rect
-                x={node.x - 5}
-                y={node.y - 5}
-                width={node.w + 10}
-                height={node.h + 10}
-                rx={15}
-                fill="none"
-                stroke={tone.stroke}
-                strokeWidth={1}
-                className="graph-halo"
-                style={{ animationDelay: `${(i + offset) * 0.2}s` }}
-              />
-            )}
+          <g key={node.label + node.x}>
             <rect
               x={node.x}
               y={node.y}
               width={node.w}
               height={node.h}
-              rx={11}
               fill={tone.fill}
               stroke={tone.stroke}
               strokeWidth={1.25}
@@ -223,7 +200,6 @@ export default function AgentGraph({ className = "" }: { className?: string }) {
             y={lane.y}
             width={lane.w}
             height={lane.h}
-            rx={18}
             fill="color-mix(in oklab, var(--surface) 55%, transparent)"
             stroke="var(--border)"
             strokeWidth={1}
@@ -248,8 +224,8 @@ export default function AgentGraph({ className = "" }: { className?: string }) {
       <Edges edges={SQL_EDGES} />
 
       <Nodes nodes={ORCHESTRATION} />
-      <Nodes nodes={RAG} offset={7} />
-      <Nodes nodes={SQL} offset={7} />
+      <Nodes nodes={RAG} />
+      <Nodes nodes={SQL} />
     </svg>
   );
 }

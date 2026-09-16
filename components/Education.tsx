@@ -4,15 +4,17 @@ import { education } from "@/lib/data";
 
 export default function Education() {
   return (
-    <Section id="education" title="Education">
-      <div className="grid gap-4 sm:grid-cols-2">
-        {education.map((item, i) => (
-          <Reveal key={item.school} delay={i * 100}>
-            <div className="card card-glow h-full p-6">
-              <p className="font-mono text-xs text-muted">{item.dates}</p>
-              <h3 className="mt-2 font-semibold leading-snug">{item.school}</h3>
-              <p className="mt-2 text-sm text-accent">{item.degree}</p>
-              <p className="mt-1 text-sm text-muted">{item.location}</p>
+    <Section id="education" index="06" title="Education">
+      <div className="divide-y divide-border border-t border-border">
+        {education.map((item) => (
+          <Reveal key={item.school}>
+            <div className="grid gap-x-8 gap-y-1 py-6 md:grid-cols-[13rem_1fr]">
+              <p className="meta pt-1">{item.dates}</p>
+              <div>
+                <h3 className="text-lg font-medium leading-snug">{item.school}</h3>
+                <p className="display-italic mt-0.5 text-[1.0625rem] text-accent">{item.degree}</p>
+                <p className="meta mt-1">{item.location}</p>
+              </div>
             </div>
           </Reveal>
         ))}

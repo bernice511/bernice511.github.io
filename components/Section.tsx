@@ -1,25 +1,32 @@
 import type { ReactNode } from "react";
 import Reveal from "./Reveal";
 
+/** Numbered section head: rule, number + title on one line, kicker right-aligned.
+ *  The running number is what gives the page its editorial spine. */
 export default function Section({
   id,
+  index,
   title,
   kicker,
   children,
 }: {
   id: string;
+  index: string;
   title: string;
   kicker?: string;
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
+    <section id={id} className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
       <Reveal>
-        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
-          {kicker && <p className="font-mono text-xs text-muted">{kicker}</p>}
+        <div className="rule-ink" />
+        <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h2 className="flex items-baseline gap-4">
+            <span className="eyebrow">{index}</span>
+            <span className="display text-4xl sm:text-5xl">{title}</span>
+          </h2>
+          {kicker && <p className="meta">{kicker}</p>}
         </div>
-        <div className="hairline mt-5" />
       </Reveal>
       <div className="mt-10">{children}</div>
     </section>
