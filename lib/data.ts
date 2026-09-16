@@ -31,12 +31,12 @@ export const profile = {
 };
 
 /** Logos-as-text row under the hero CTAs — instant credibility scan.
- *  Employer first. Bayer is the client of the Thoughtworks engagement, not an
- *  employer, and the row has to say so — it sits directly under the about text
- *  where a recruiter will read it as employment otherwise. */
+ *  Employer first. Bayer is Thoughtworks' client, not hers and not an employer
+ *  of hers, so the note names the relationship explicitly — this row sits
+ *  directly under the about text and would read as employment otherwise. */
 export const trustBar: { name: string; note: string }[] = [
   { name: "Thoughtworks", note: "Sr. Consultant — Data Engineer" },
-  { name: "Bayer", note: "Client — GenAI in production" },
+  { name: "Bayer", note: "Thoughtworks client — GenAI in production" },
   { name: "Northeastern", note: "MS in AI · Research Assistant" },
 ];
 
