@@ -56,7 +56,7 @@ export default function Hero() {
                 rel="noreferrer"
                 className="border-b-2 border-foreground pb-0.5 font-medium transition-colors hover:border-accent hover:text-accent"
               >
-                Read the CV →
+                Read the resume →
               </a>
               <a href="#prince" className="link-rule text-muted">
                 See the flagship build

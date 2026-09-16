@@ -83,7 +83,7 @@ export default function Nav() {
             rel="noreferrer"
             className="border-b-2 border-foreground pb-0.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
           >
-            CV
+            Resume
           </a>
           <button
             type="button"

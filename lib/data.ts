@@ -20,7 +20,7 @@ export const profile = {
   headlineEmphasis: "people actually use.",
   /** Two-line supporting proof, shown directly under the headline. */
   subhead:
-    "2+ years shipping multi-agent GenAI at Bayer with Thoughtworks — RAG, Text-to-SQL, and NER running against 18,000+ preclinical safety studies. Now an MS in AI student at Northeastern.",
+    "4+ years in software and data engineering — 2+ of them shipping multi-agent GenAI at Bayer with Thoughtworks, where RAG, Text-to-SQL and NER run against 18,000+ preclinical safety studies. Now an MS in AI student at Northeastern.",
   /** Long-form version, used for meta description and OG cards. */
   tagline:
     "Generative AI engineer with 4+ years of software/data engineering experience, including 2+ years building production LLM systems at Thoughtworks, recipient of the Bayer GenAI Award for Best Technical Implementation. Built PRINCE, a multi-agent platform embedded in Bayer's preclinical research workflow across RAG, Text-to-SQL, and NER at scale. Now pursuing an MS in AI at Northeastern's Khoury College, seeking a Spring 2027 Agentic AI internship.",
