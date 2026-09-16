@@ -31,12 +31,11 @@ export const profile = {
 };
 
 /** Logos-as-text row under the hero CTAs — instant credibility scan.
- *  Employer first. Bayer is Thoughtworks' client, not hers and not an employer
- *  of hers, so the note names the relationship explicitly — this row sits
- *  directly under the about text and would read as employment otherwise. */
+ *  Only places Bernice has actually held a role. Bayer is Thoughtworks' client,
+ *  not an employer of hers, so it is deliberately not listed here — it is named
+ *  in the PRINCE case study, where the engagement is described properly. */
 export const trustBar: { name: string; note: string }[] = [
   { name: "Thoughtworks", note: "Sr. Consultant — Data Engineer" },
-  { name: "Bayer", note: "Thoughtworks client — GenAI in production" },
   { name: "Northeastern", note: "MS in AI · Research Assistant" },
 ];
 
