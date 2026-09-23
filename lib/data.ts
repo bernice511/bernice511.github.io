@@ -339,6 +339,7 @@ export const projects: Project[] = [
       },
     ],
     tech: ["Python", "LangGraph", "Claude", "Pydantic", "httpx", "Next.js", "React Leaflet"],
+    demo: "https://newsroomfeed.duckdns.org/",
   },
   {
     slug: "entiscribe",
